@@ -89,6 +89,10 @@ public class TodoMain {
 				int id = sc.nextInt();
 				TodoUtil.completeItem(l, id);
 				break;
+				
+			case "comp_multi":
+				TodoUtil.completeMultiItem(l);
+				break;
 
 			case "exit":
 				quit = true;

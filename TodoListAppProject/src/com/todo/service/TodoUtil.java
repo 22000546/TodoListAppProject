@@ -73,7 +73,6 @@ public class TodoUtil {
 		StringTokenizer st = new StringTokenizer(line);
 		while(st.hasMoreTokens()) {
 			int index = Integer.parseInt(st.nextToken());
-			System.out.println(index);
 			count ++;
 			if (l.deleteItem(index) > 0) {
 				delCount ++;
@@ -129,6 +128,25 @@ public class TodoUtil {
 	public static void completeItem(TodoList l, int index) {
 		l.completeItem(index);
 		System.out.println("선택 항목이 완료 처리 되었습니다.");
+	}
+	
+	public static void completeMultiItem(TodoList l) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("\n"
+				+ "======== 다중 항목 완료 ========\n"
+				+ "완료 처리할 항목들의 번호를 입력해주세요. : ");
+		
+		String line = sc.nextLine();
+		StringTokenizer st = new StringTokenizer(line);
+		int count = st.countTokens();
+		while(st.hasMoreTokens()) {
+			int index = Integer.parseInt(st.nextToken());
+			l.completeItem(index);
+		}
+		System.out.println("입력된 항목들이 완료 처리 되었습니다.");
+		
 	}
 	
 	public static void findList(TodoList l, String keyword) {
