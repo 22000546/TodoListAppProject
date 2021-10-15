@@ -58,6 +58,39 @@ public class TodoUtil {
 		}
 		
 	}
+	
+	public static void deleteMultiItem(TodoList l) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("\n"
+				+ "======== 기존 항목 삭제 ========\n"
+				+ "삭제할 항목들의 번호를 입력해주세요. : ");
+		
+		int count = 0; 
+		int delCount = 0;
+		String line = sc.nextLine();
+		StringTokenizer st = new StringTokenizer(line);
+		while(st.hasMoreTokens()) {
+			int index = Integer.parseInt(st.nextToken());
+			System.out.println(index);
+			count ++;
+			if (l.deleteItem(index) > 0) {
+				delCount ++;
+			}
+		}
+		if(count == delCount) {
+			System.out.println("총 " + count + "개의 항목들이 성공적으로 삭제되었습니다.");
+		} else {
+			if(delCount == 0) {
+				System.out.println("선택한 모든 항목의 삭제가 이루어지지 않았습니다.");
+			} else {
+				System.out.println(delCount + "개의 항목들이 성공적으로 삭제되고, " + (count-delCount) + "개의 항목들이 제대로 삭제되지 않았습니다.");
+			}
+			System.out.println("다시 한 번 확인해주세요.");
+		}
+		
+	}
 
 
 	public static void updateItem(TodoList l) {
