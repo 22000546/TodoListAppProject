@@ -232,6 +232,22 @@ public class TodoUtil {
 		
 	}
 	
+	public static void listTime(TodoList l) {
+		
+		System.out.println("======== 카테고리 별 활동 시간 보기 ========");
+		ArrayList<String> categories = l.getCategories();
+		
+		for(int i = 0; i < categories.size(); i ++) {
+			int totalTime = 0;
+			ArrayList<TodoItem> lists = l.getListCategory(categories.get(i));
+			for(TodoItem item : lists) {
+				totalTime += item.getTime();
+			}
+			System.out.println(categories.get(i) + " : " + totalTime + "분");
+		}
+
+	}
+	
 	public static void saveList(TodoList l, String filename) {
 		try {
 			Writer w = new FileWriter(filename);

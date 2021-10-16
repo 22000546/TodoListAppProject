@@ -253,10 +253,12 @@ public class TodoList {
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
 				int is_completed = rs.getInt("is_completed");
+				int time = rs.getInt("time");
 				TodoItem t = new TodoItem(title, description, category, due_date);
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				t.setIs_completed(is_completed);
+				t.setTime(time);
 				list.add(t);
 			}
 			pstmt.close();

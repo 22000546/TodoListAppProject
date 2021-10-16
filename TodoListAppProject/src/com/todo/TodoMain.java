@@ -75,6 +75,10 @@ public class TodoMain {
 				TodoUtil.listAll(l, 1);
 				break;
 				
+			case "ls_cate_time":
+				TodoUtil.listTime(l);
+				break;
+				
 			case "find":
 				String keyword = sc.nextLine().trim();
 				TodoUtil.findList(l, keyword);
