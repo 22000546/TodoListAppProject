@@ -37,8 +37,20 @@ public class TodoUtil {
 				
 		System.out.print("마감일자를 입력하세요. : ");
 		due_date = sc.next();
+		if(!due_date.matches("^\\d{4}/(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])$")) {
+			System.out.println("날짜 형식이 잘못되었습니다. ");
+			return;
+		}
+		
+		System.out.print("중요도를 1에서 5 사이의 수로 입력하세요. : ");
+		int importance = sc.nextInt();
+		if(importance < 1 || importance > 5) {
+			System.out.println("숫자 형식이 잘못되었습니다. ");
+			return;
+		}
 		
 		TodoItem t = new TodoItem(title, desc, category, due_date);
+		t.setImportance(importance);
 		if(list.addItem(t) > 0)
 			System.out.println("항목이 정상적으로 추가되었습니다.");
 	}
@@ -64,7 +76,7 @@ public class TodoUtil {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("\n"
-				+ "======== 기존 항목 삭제 ========\n"
+				+ "======== 다중 항목 삭제 ========\n"
 				+ "삭제할 항목들의 번호를 입력해주세요. : ");
 		
 		int count = 0; 
@@ -117,9 +129,21 @@ public class TodoUtil {
 		
 		System.out.print("새로운 마감일자를 입력하세요. : ");
 		String new_due_date = sc.nextLine().trim();
+		if(!new_due_date.matches("^\\d{4}/(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])$")) {
+			System.out.println("날짜 형식이 잘못되었습니다. ");
+			return;
+		}
+		
+		System.out.print("중요도를 1에서 5 사이의 수로 입력하세요. : ");
+		int importance = sc.nextInt();
+		if(importance < 1 || importance > 5) {
+			System.out.println("숫자 형식이 잘못되었습니다. ");
+			return;
+		}
 		
 		TodoItem t = new TodoItem(new_title, new_description, new_category, new_due_date);
 		t.setId(index);
+		t.setImportance(importance);
 		if(l.updateItem(t) > 0)
 			System.out.println("항목이 성공적으로 수정되었습니다.");
 
