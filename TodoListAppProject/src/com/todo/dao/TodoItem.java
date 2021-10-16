@@ -12,7 +12,7 @@ public class TodoItem {
     private String due_date;
     private int is_completed;
     private int time;
-    private int period;
+    private int importance;
 
 
     public TodoItem(String title, String desc){
@@ -55,7 +55,21 @@ public class TodoItem {
         this.time = time;
     }
     
-    public int getId() {
+    public TodoItem(int id, String title, String desc, String category, String current_date, String due_date,
+			int is_completed, int time, int importance) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.desc = desc;
+		this.current_date = current_date;
+		this.category = category;
+		this.due_date = due_date;
+		this.is_completed = is_completed;
+		this.time = time;
+		this.importance = importance;
+	}
+
+	public int getId() {
     	return id;
     }
     
@@ -120,12 +134,12 @@ public class TodoItem {
     	this.time = time;
     }
     
-    public int getPeriod() {
-    	return period;
+    public int getImportance() {
+    	return importance;
     }
     
-    public void setPeriod(int period) {
-    	this.period = period;
+    public void setImportance(int importance) {
+    	this.importance = importance;
     }
     
     public boolean findKeyword(String keyword) {
@@ -142,7 +156,7 @@ public class TodoItem {
     
     public String toString() {
     	String str;
-    	str = id + " [" + category + "] " + title;
+    	str = id + " [" + category + " / " + importance + "] " + title;
     	if(is_completed == 1)
     		str += "[V]";
     	str += " - " + desc + "(" + current_date + " ~ " + due_date + ") ";
@@ -152,7 +166,7 @@ public class TodoItem {
     
     public String toSaveString() {
     	return category + "##" + title + "##" + desc + "##" + current_date + "##" + due_date 
-    			+ time + "##" + period +  "\n";
+    			+ "##" + is_completed + "##" + time + "##" + importance +  "\n";
     }
         
 }
