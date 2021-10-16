@@ -25,8 +25,8 @@ public class TodoList {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(filename));
 			String line;
-			String sql = "insert into list (title, memo, category, current_date, due_date)"
-					+ " values (?, ?, ?, ?, ?);";
+			String sql = "insert into list (title, memo, category, current_date, due_date, time, period)"
+					+ " values (?, ?, ?, ?, ?, ?, ?);";
 			int records = 0;
 			while((line = br.readLine()) != null) {
 				StringTokenizer st = new StringTokenizer(line, "##");
@@ -35,6 +35,8 @@ public class TodoList {
 				String description = st.nextToken();
 				String due_date = st.nextToken();
 				String current_date = st.nextToken();
+//				String time = st.nextToken();
+//				String period = st.nextToken();
 				
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, title);
@@ -42,6 +44,8 @@ public class TodoList {
 				pstmt.setString(3, category);
 				pstmt.setString(4, current_date);
 				pstmt.setString(5, due_date);
+//				pstmt.setString(6, time);
+//				pstmt.setString(7, period);
 				int count = pstmt.executeUpdate();
 				if(count > 0) records ++;
 				pstmt.close();
@@ -124,6 +128,20 @@ public class TodoList {
 		}
 	}
 	
+	public void addTime(int index, int time) {
+		String sql = "update list set time = ? where id = ?;";
+		PreparedStatement pstmt;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, time);
+			pstmt.setInt(2, index);
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public ArrayList<TodoItem> getList() {
 		ArrayList<TodoItem> list = new ArrayList<TodoItem>();
 		Statement stmt;
@@ -170,10 +188,12 @@ public class TodoList {
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
 				int is_completed = rs.getInt("is_completed");
+				int time = rs.getInt("time");
 				TodoItem t = new TodoItem(title, description, category, due_date);
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				t.setIs_completed(is_completed);
+				t.setTime(time);
 				list.add(t);
 			}
 			stmt.close();

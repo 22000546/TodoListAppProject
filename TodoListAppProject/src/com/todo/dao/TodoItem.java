@@ -11,6 +11,8 @@ public class TodoItem {
     private String category;
     private String due_date;
     private int is_completed;
+    private int time;
+    private int period;
 
 
     public TodoItem(String title, String desc){
@@ -43,13 +45,14 @@ public class TodoItem {
         this.due_date = due_date;
     }
     
-    public TodoItem(String title, String desc, String date, String category, String due_date, int is_completed) {
+    public TodoItem(String title, String desc, String date, String category, String due_date, int is_completed, int time) {
     	this.title=title;
         this.desc=desc;
         this.current_date = date;
         this.category = category;
         this.due_date = due_date;
         this.is_completed = is_completed;
+        this.time = time;
     }
     
     public int getId() {
@@ -109,6 +112,22 @@ public class TodoItem {
     	this.is_completed = is_completed;
     }
     
+    public int getTime() {
+    	return time;
+    }
+    
+    public void setTime(int time) {
+    	this.time = time;
+    }
+    
+    public int getPeriod() {
+    	return period;
+    }
+    
+    public void setPeriod(int period) {
+    	this.period = period;
+    }
+    
     public boolean findKeyword(String keyword) {
     	if(title.contains(keyword) || desc.contains(keyword))
     		return true;
@@ -122,14 +141,18 @@ public class TodoItem {
     }
     
     public String toString() {
-    	if(is_completed == 0)
-    		return id + " [" + category + "] " + title + " - " + desc + "(" + current_date + " ~ " + due_date + ")";
-    	else
-    		return id + " [" + category + "] " + title + "[V] - " + desc + "(" + current_date + " ~ " + due_date + ")";
+    	String str;
+    	str = id + " [" + category + "] " + title;
+    	if(is_completed == 1)
+    		str += "[V]";
+    	str += " - " + desc + "(" + current_date + " ~ " + due_date + ") ";
+    	
+    	return str;
     }
     
     public String toSaveString() {
-    	return category + "##" + title + "##" + desc + "##" + current_date + "##" + due_date +  "\n";
+    	return category + "##" + title + "##" + desc + "##" + current_date + "##" + due_date 
+    			+ time + "##" + period +  "\n";
     }
         
 }

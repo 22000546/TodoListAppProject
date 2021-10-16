@@ -173,7 +173,8 @@ public class TodoUtil {
 	public static void listAll(TodoList l, int comp) {
 		int count = 0;
 		for(TodoItem item : l.getList(comp)) {
-			System.out.println(item.toString());
+			System.out.print(item.toString());
+			System.out.println("(" + item.getTime() + "분)");
 			count ++;
 		}
 		System.out.println("총 " + count + "개의 항목이 완료되었습니다.");
@@ -205,6 +206,30 @@ public class TodoUtil {
 		}
 		System.out.println();
 		System.out.println("총 " + count + "개의 항목을 찾았습니다.");
+	}
+	
+	public static void addTime(TodoList l) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("======== 완료된 항목 시간 입력하기 ========");
+		System.out.print("시간을 입력할 항목의 번호를 입력해주세요. : ");
+		int index = sc.nextInt();
+		int count = 0;
+		for(TodoItem item : l.getList(1)) {
+			if(item.getId() == index)
+				count ++;
+		}
+		if(count == 0) {
+			System.out.println("해당 항목은 완료 처리되지 않았습니다.");
+			System.out.println("완료 후 실행해주세요. ");
+		} else {
+			System.out.print("시간을 분 단위로 입력해주세요. : ");
+			int time = sc.nextInt();
+			l.addTime(index, time);
+			System.out.println(time + "분이 입력되었습니다.");
+		}
+		
 	}
 	
 	public static void saveList(TodoList l, String filename) {

@@ -90,6 +90,10 @@ public class TodoMain {
 				TodoUtil.completeItem(l, id);
 				break;
 				
+			case "comp_time":
+				TodoUtil.addTime(l);
+				break;
+				
 			case "comp_multi":
 				TodoUtil.completeMultiItem(l);
 				break;
