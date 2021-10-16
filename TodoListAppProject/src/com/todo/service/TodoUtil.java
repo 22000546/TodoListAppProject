@@ -286,6 +286,44 @@ public class TodoUtil {
 
 	}
 	
+	public static void showPerformance(TodoList l) {
+		System.out.print("기간을 입력해주세요. (yyyy/mm/dd yyyy/mm/dd) : ");
+		Scanner sc = new Scanner(System.in);
+		String line = sc.nextLine();
+		StringTokenizer st = new StringTokenizer(line);
+		String start = st.nextToken();
+		String end = st.nextToken();
+		
+		if(!start.matches("^\\d{4}/(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])$")
+				|| !end.matches("^\\d{4}/(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])$")) {
+			System.out.println("날짜 형식이 잘못되었습니다. ");
+			return;
+		}
+		
+		ArrayList<TodoItem> list = l.getList();
+		
+		int sum = 0;
+		int completed = 0;
+		for(TodoItem item : list) {
+			if(item.getCurrent_date().substring(0, 10).compareTo(start) >= 0 && item.getCurrent_date().substring(0, 10).compareTo(end) <= 0) {
+				sum ++;
+				if(item.getIs_completed() == 1) {
+					completed ++;
+				}
+			}
+		}
+		float rate = (completed / (float) sum) * 100;
+		int n = (int) rate / 10;
+		for(int i = 0; i < n; i ++) {
+			System.out.print("#");
+		}
+		for(int i = 0; i < 10-n; i ++) {
+			System.out.print(".");
+		}
+		System.out.printf(" (%.1f%%)", rate);
+		System.out.println("\n총 " + sum + "개의 할 일 중 " + completed + "개의 할 일을 완료하였습니다.");
+	}
+	
 	public static void saveList(TodoList l, String filename) {
 		try {
 			Writer w = new FileWriter(filename);

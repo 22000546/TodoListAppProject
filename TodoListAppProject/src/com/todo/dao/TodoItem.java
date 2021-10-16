@@ -156,7 +156,7 @@ public class TodoItem {
     
     public String toString() {
     	String str;
-    	str = id + " [" + category + " / " + importance + "] " + title;
+    	str = id + " [" + category + "] [" + importance + "] " + title;
     	if(is_completed == 1)
     		str += "[V]";
     	str += " - " + desc + "(" + current_date + " ~ " + due_date + ") ";

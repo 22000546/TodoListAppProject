@@ -71,6 +71,11 @@ public class TodoMain {
 				TodoUtil.listAll(l, "due_date", 0);
 				break;
 				
+			case "ls_imp":
+				System.out.println("중요도 순으로 정렬되었습니다.");
+				TodoUtil.listAll(l, "importance", 0);
+				break;
+				
 			case "ls_comp":
 				TodoUtil.listAll(l, 1);
 				break;
@@ -107,6 +112,10 @@ public class TodoMain {
 				TodoUtil.completeMultiItem(l);
 				break;
 
+			case "perform":
+				TodoUtil.showPerformance(l);
+				break;
+				
 			case "exit":
 				quit = true;
 				break;
