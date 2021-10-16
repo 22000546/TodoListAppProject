@@ -186,6 +186,20 @@ public class TodoUtil {
 			System.out.println(item.toString());
 		}
 	}
+	
+	public static void listByDueDate(TodoList l, String date) {
+		if(!date.matches("^\\d{4}/(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])$")) {
+			System.out.println("날짜 형식이 잘못되었습니다. ");
+			return;
+		}
+		System.out.println("======== 해야 할 일 보기 ========");
+		ArrayList<TodoItem> list = l.getList();
+		for(TodoItem item : list) {
+			if(item.getDue_date().compareTo(date) < 1) {
+				System.out.println(item.toString());
+			}
+		}
+	}
 
 	public static void listAllCategories(TodoList l) {
 		System.out.println("======== 전체 카테고리 보기 ========");

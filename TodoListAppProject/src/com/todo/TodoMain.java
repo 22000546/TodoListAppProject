@@ -78,6 +78,11 @@ public class TodoMain {
 			case "ls_cate_time":
 				TodoUtil.listTime(l);
 				break;
+			
+			case "ls_todo":
+				String date = sc.next();
+				TodoUtil.listByDueDate(l, date);
+				break;
 				
 			case "find":
 				String keyword = sc.nextLine().trim();
