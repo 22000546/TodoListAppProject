@@ -33,8 +33,8 @@ public class TodoList {
 				String category = st.nextToken();
 				String title = st.nextToken();
 				String description = st.nextToken();
-				String due_date = st.nextToken();
 				String current_date = st.nextToken();
+				String due_date = st.nextToken();
 				String is_completed = st.nextToken();
 				String time = st.nextToken();
 				String importance = st.nextToken();

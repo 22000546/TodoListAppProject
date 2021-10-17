@@ -217,7 +217,7 @@ public class TodoUtil {
 			return;
 		}
 		System.out.println("======== 해야 할 일 보기 ========");
-		ArrayList<TodoItem> list = l.getList();
+		ArrayList<TodoItem> list = l.getList(0);
 		for(TodoItem item : list) {
 			if(item.getDue_date().compareTo(date) < 1) {
 				System.out.println(item.toString());
@@ -281,7 +281,7 @@ public class TodoUtil {
 			for(TodoItem item : lists) {
 				totalTime += item.getTime();
 			}
-			System.out.println(categories.get(i) + " : " + totalTime + "분");
+			System.out.println(categories.get(i) + " : " + (totalTime/60) +"시 " + (totalTime%60) +  "분");
 		}
 
 	}
@@ -314,13 +314,15 @@ public class TodoUtil {
 		}
 		float rate = (completed / (float) sum) * 100;
 		int n = (int) rate / 10;
+		System.out.print("[");
 		for(int i = 0; i < n; i ++) {
 			System.out.print("#");
 		}
 		for(int i = 0; i < 10-n; i ++) {
 			System.out.print(".");
 		}
-		System.out.printf(" (%.1f%%)", rate);
+		System.out.print("]");
+		System.out.printf(" %.1f%%", rate);
 		System.out.println("\n총 " + sum + "개의 할 일 중 " + completed + "개의 할 일을 완료하였습니다.");
 	}
 	
